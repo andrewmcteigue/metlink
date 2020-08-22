@@ -1,28 +1,57 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="green"
+      dark
+    >   
+
+      <v-avatar
+        size="80"
+        color="green"
+        class="mr-3"
+      >
+        <img :src="require('./assets/poppa.jpg')" alt="alt">
+      </v-avatar>
+
+      
+      <h2>Poppa's Bus Stop App</h2>
+
+    </v-app-bar>
+
+    <v-main>
+      <BusView></BusView>
+    </v-main>
+
+    <v-footer
+      color="green"
+      dark
+    >
+      <v-avatar
+        size="80"
+        color="green"
+        class="mr-3"
+      >
+        <img :src="require('./assets/charlotte.jpg')" alt="alt">
+      </v-avatar>
+
+      Designed by Charlotte McTeigue
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BusView from './components/BusView'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    BusView
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
