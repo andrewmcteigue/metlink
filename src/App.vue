@@ -4,6 +4,7 @@
       app
       color="green"
       dark
+      height="90"
     >   
 
       <v-avatar
@@ -14,7 +15,6 @@
         <img :src="require('./assets/poppa.jpg')" alt="alt">
       </v-avatar>
 
-      
       <h2>Poppa's Bus Stop App</h2>
 
     </v-app-bar>
@@ -26,6 +26,7 @@
     <v-footer
       color="green"
       dark
+      fixed
     >
       <v-avatar
         size="80"
@@ -35,7 +36,7 @@
         <img :src="require('./assets/charlotte.jpg')" alt="alt">
       </v-avatar>
 
-      Designed by Charlotte McTeigue
+      Design by Charlotte
     </v-footer>
   </v-app>
 </template>

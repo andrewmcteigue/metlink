@@ -1,16 +1,46 @@
 <template>
   <v-container>
-    
 
-    <v-row dense v-if="stopData">
+    <v-row fluid>
+      <v-col cols="12">
+       <v-btn
+          v-for="(stop, i) in stopNumbers"
+          :key="i"
+          class="mr-5"
+          color="orange"
+          @click="getStopData(stop)"
+        >
+        Stop {{stop}}
+        </v-btn>
+
+        <v-text-field
+          
+          class="mt-5"
+          label="Enter stop number"
+          v-model="manualSearch"
+          :loading="loading"
+        >
+        </v-text-field>
+
+        <v-btn
+          class="mr-5"
+          color="orange"
+          @click="getStopData(manualSearch)"
+        >
+        Search {{manualSearch}}
+        </v-btn>
+
+      </v-col>
+    </v-row>
+  
+     <v-row dense v-if="stopData">
         <v-col cols="12">
           <v-card
             color="red"
             dark
           >
-            <v-card-title class="headline">Upcoming departures for stop 4118</v-card-title>
+            <v-card-title class="headline">Upcoming departures for stop {{stopData.Stop.Sms}} </v-card-title>
             <v-card-subtitle>{{stopData.Notices[0].LineNote}}</v-card-subtitle>
-
           </v-card>
         </v-col>
 
@@ -48,22 +78,27 @@ export default {
   name: 'BusView',
   
   data:() => ({
-    stopData: null
+    loading: false,
+    stopData: null,
+    stopNumbers: [4117,4118],
+    manualSearch: 4117
   }),
-  // filters: {
-  //   formateDate(value){
-  //     return "yo"
-  //   }
-  // },
   created(){
-    fetch('https://cors-anywhere.herokuapp.com/www.metlink.org.nz/api/v1/StopDepartures/4118')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      this.stopData = data
-    })
-    .catch(err => console.log(err))
+ 
 
+  },
+  methods: {
+    getStopData(stopNumber){
+      this.loading = true
+      fetch(`https://cors-anywhere.herokuapp.com/www.metlink.org.nz/api/v1/StopDepartures/${stopNumber}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.stopData = data
+        this.loading = false
+      })
+      .catch(err => console.log(err))
+      }
   }
 }
 </script>
